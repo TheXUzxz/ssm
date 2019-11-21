@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="/goods/css/elementui.css">
+  
+
+    </style>
+</head>
+<body>
+<div id="app">
+  
+   <template>
+    <el-table
+      :data="tableData"
+      style="width: 100%">
+      <el-table-column
+        prop="id"
+        label="商品id"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="商品名"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="remark"
+        label="商品简介">
+      </el-table-column>
+       <el-table-column
+        prop="createdTime"
+        label="商品创建时间">
+      </el-table-column>
+    </el-table>
+  </template>
+   
+
+</div>
+</body>
+<script src="/goods/js/vue.js"></script>
+<script src="/goods/js/axios.js"></script>
+<script src="/goods/js/elementui.js"></script>
+<script>
+     new Vue({
+        el: '#app',
+        data(){
+            return {
+                tableData: [],
+             
+            }
+        },
+        created(){
+            this.fetchData();
+        },
+        methods:{
+            fetchData (){
+                axios.get(`http://localhost/CGB-SSM-1.01/goods`).then(response => {
+                    this.tableData = response.data.rows;
+                   
+                });
+            },
+           
+        }
+    })
+</script>
+</html>
